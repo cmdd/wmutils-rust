@@ -71,8 +71,8 @@ fn main() {
 
 
     let absolute = args.is_present("absolute");
-    let x = value_t!(args.value_of("x"), i16).unwrap_or_else(invalid_number);
-    let y = value_t!(args.value_of("y"), i16).unwrap_or_else(invalid_number);
+    let x = value_t!(args.value_of("x"), i16).unwrap_or_else(util::invalid_number);
+    let y = value_t!(args.value_of("y"), i16).unwrap_or_else(util::invalid_number);
     let wids = args.values_of("wid").unwrap(); // Unwrap is fine, the arg is required
 
     let connection = util::init_xcb("wrs");
@@ -82,10 +82,4 @@ fn main() {
         resize(&connection, wid, absolute, x, y);
     }
     connection.flush();
-}
-
-fn invalid_number<T, E>(_: E) -> T {
-    use std::io::Write;
-    write!(::std::io::stderr(), "invalid number format\n").unwrap();
-    ::std::process::exit(1);
 }

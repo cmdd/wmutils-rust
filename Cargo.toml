@@ -36,3 +36,8 @@ path = "src/wrs.rs"
 [[bin]]
 name = "lsw"
 path = "src/lsw.rs"
+
+[[bin]]
+name = "wtp"
+path = "src/wtp.rs"
+

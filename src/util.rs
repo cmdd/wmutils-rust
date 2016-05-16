@@ -60,3 +60,9 @@ pub fn get_window_id(input: &str) -> xproto::Window {
 pub fn get_query_tree(conn: &xcb::Connection, window: xcb::Window) -> xcb::QueryTreeReply {
     xcb::query_tree(conn, window).get_reply().expect("no such window")
 }
+
+pub fn invalid_number<T, E>(_: E) -> T {
+    use std::io::Write;
+    write!(::std::io::stderr(), "invalid number format\n").unwrap();
+    ::std::process::exit(1);
+}
