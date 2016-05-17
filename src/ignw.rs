@@ -22,7 +22,7 @@ fn main () {
     // println!("{:?}", args.occurrences_of("wid"));
 
     let wid: Vec<_> = args.values_of("wid").unwrap().collect();
-    let wid: Vec<u32> = wid.iter().map(|x| util::get_window_id(x)).collect();
+    let wid: Vec<u32> = wid.iter().map(|win| util::get_window_id(win)).collect();
 
     /*
     let mut wid = Vec::new();
@@ -45,5 +45,4 @@ fn main () {
     }
 
     connection.flush();
-
 }
