@@ -48,3 +48,7 @@ path = "src/chwso.rs"
 [[bin]]
 name = "ignw"
 path = "src/ignw.rs"
+
+[[bin]]
+name = "chwb"
+path = "src/chwb.rs"

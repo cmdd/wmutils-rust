@@ -18,19 +18,8 @@ fn main () {
              .required(true))
         .get_matches();
 
-    // Debug
-    // println!("{:?}", args.occurrences_of("wid"));
-
     let wid: Vec<_> = args.values_of("wid").unwrap().collect();
     let wid: Vec<u32> = wid.iter().map(|win| util::get_window_id(win)).collect();
-
-    /*
-    let mut wid = Vec::new();
-
-    for win in wit {
-        wid.push(util::get_window_id(win))
-    }
-    */
 
     let connection = util::init_xcb("ignw");
 
