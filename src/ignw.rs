@@ -5,7 +5,7 @@ use clap::{App, Arg};
 
 pub mod util;
 
-fn main () {
+fn main() {
     let args = App::new("ignw")
         .about("ignore window")
         .arg(Arg::with_name("reset")
