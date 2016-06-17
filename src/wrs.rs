@@ -1,6 +1,5 @@
 extern crate xcb;
-#[macro_use]
-extern crate clap;
+#[macro_use] extern crate clap;
 
 use clap::{App, Arg};
 

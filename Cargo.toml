@@ -52,3 +52,7 @@ path = "src/ignw.rs"
 [[bin]]
 name = "chwb"
 path = "src/chwb.rs"
+
+[[bin]]
+name = "wmp"
+path = "src/wmp.rs"
