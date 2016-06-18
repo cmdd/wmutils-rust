@@ -3,15 +3,22 @@ extern crate xcb;
 extern crate clap;
 
 use clap::{App, Arg};
+use std::process;
 
 pub mod util;
+
+macro_rules! wlnerr(
+    ($($arg:tt)*) => ({
+        use std::io::{Write, stderr};
+        writeln!(&mut stderr(), $($arg)*).ok();
+    })
+);
 
 enum CursorMode {
     Absolute { x: i16, y: i16 },
     Relative { x: i16, y: i16 },
 }
 
-// TODO: Replace print with just returning?
 fn spot_cursor(c: &xcb::Connection, win: xcb::Window) {
     let qp = xcb::query_pointer(c, win);
     let qr = qp.get_reply();
@@ -27,7 +34,8 @@ fn spot_cursor(c: &xcb::Connection, win: xcb::Window) {
             }
         }
     } else {
-        // TODO: return error
+        wlnerr!("cannot retrieve cursor position");
+        process::exit(1);
     }
 }
 
@@ -79,25 +87,15 @@ fn main() {
 
     match mode {
         Some(m) => warp_cursor(&connection, &screen, m),
-        None => match args.args.len() {
-            0 => {
-                unsafe {
-                    let ref scr = *screen.ptr;
-                    let win = scr.root;
-                    spot_cursor(&connection, win);
-                }
-            },
-            1 => {
-                if let Some(wid) = wid {
-                    let win = util::get_window_id(wid);
-                    spot_cursor(&connection, win);
-                } else {
-                    // TODO: Error
-                }
-            },
-            _ => {
-                println!("{}", args.usage());
-            },
+        None => if let Some(wid) = wid {
+            let win = util::get_window_id(wid);
+            spot_cursor(&connection, win);
+        } else {
+            unsafe {
+                let ref scr = *screen.ptr;
+                let win = scr.root;
+                spot_cursor(&connection, win);
+            }
         }
     };
 
