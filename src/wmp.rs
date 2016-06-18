@@ -28,9 +28,9 @@ fn spot_cursor(c: &xcb::Connection, win: xcb::Window) {
             let r = *rr.ptr;
         
             if r.child != xcb::NONE {
-                println!("{}, {}", r.win_x, r.win_y);
+                println!("{} {}", r.win_x, r.win_y);
             } else {
-                println!("{}, {}", r.root_x, r.root_y);
+                println!("{} {}", r.root_x, r.root_y);
             }
         }
     } else {
